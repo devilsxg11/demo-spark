@@ -16,15 +16,15 @@ object WordCount {
     //创建配置对象
     val conf: SparkConf = new SparkConf()
       .setAppName(s"${WordCount.getClass.getSimpleName}")
-      .setMaster("yarn") //local[*] ：为当前 spark 作业分配当前计算机的可用 CPU core 的个数
+      .setMaster("local[*]") //local[*] ：为当前 spark 作业分配当前计算机的可用 CPU core 的个数
     val sc = new SparkContext(conf)
 
     //生成RDD
-    //val textPath = getClass.getClassLoader.getResource("word.txt").getPath
-    //val textPath = "hdfs:///tmp/sxg/word.txt";
-    val textPath = args(0);
-    println("----------------->" + textPath)
+    val textPath = getClass.getClassLoader.getResource("word.txt").getPath
+//    val textPath = args(0);
+
     val textRDD: RDD[String] = sc.textFile(textPath)
+    println("----------------->" + textRDD.partitions.length)
     //进行 transformation 操作和 action 操作
     val retRDD: RDD[(String, Int)] = textRDD.flatMap(line => line.split(" "))
       .map(word => (word, 1))
