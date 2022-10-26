@@ -30,7 +30,7 @@ object Ds2 {
     val df: DataFrame = spark.read.schema(schema).json(jsonPath)
     df.show()
 
-    // 1. 创建 Dataset，也可以不设置 schema
+    // 2. 创建 Dataset，也可以不设置 schema
     import spark.implicits._
     val ds: Dataset[Person] = spark.read.schema(schema).json(jsonPath).as[Person]
     ds.show()

@@ -27,12 +27,13 @@ object Ds1 {
     val list = List("Hadoop","Hive","Spark","Flink")
     val rdd: RDD[String] = sc.parallelize(list)
 
+    // 转化成 DataFrame
     val df: DataFrame = rdd.toDF("bigdata")
-    println(df.schema)
-    df.foreach(x=>println(x))
+    df.show()
 
+    // 转化成 Dataset
     val ds: Dataset[String] = rdd.toDS()
-    ds.foreach(x=>println(x))
+    ds.show()
 
   }
 }
