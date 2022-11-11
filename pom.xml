@@ -11,6 +11,7 @@
     <modules>
         <module>demo-spark-core</module>
         <module>demo-spark-sql</module>
+        <module>demo-spark-streaming</module>
     </modules>
 
     <properties>
